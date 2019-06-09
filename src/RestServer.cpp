@@ -12,14 +12,19 @@ const char* password = "12345678";
 void handleRoot() {
   char html[1000];
 
-  snprintf ( html, 1000, "<html><body>\
+  snprintf (html, 1000, "<html><body>\
       <h1>Gestionnaire de la serre</h1>\
       <div><h2>Etat</h2>\
       <div>Temp. : </div>\
+      <div>Etat : </div>\
+      </div>\
+      <div><h2>Actions</h2>\
+      <div><button>Ouvrir</button></div>\
+      <div><button>Fermer</button></div>\
       </div>\
       </body></html>");
 
-  server.send(200, "text/plain", "Gestionnaire de la serre");
+  server.send(200, "text/html", html);
 }
 
 //===============================================================
@@ -35,7 +40,7 @@ void RestServ::init() {
     WiFi.mode(WIFI_AP); //Access Point mode
     IPAddress apIP(192, 168, 0, 1);
     WiFi.softAPConfig(apIP, apIP, IPAddress(255, 255, 255, 0));
-    WiFi.softAP(ssid);    // Password length minimum 8 char
+    WiFi.softAP(ssid, password);    // Password length minimum 8 char
     Serial.println("");
     Serial.print("WiFi hotspot ");
     Serial.println(ssid);
